@@ -1,0 +1,10 @@
+$ignoreContent = @"
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+.vscode/
+.DS_Store
+"@
+Set-Content -Path .gitignore -Value $ignoreContent -Encoding UTF8
