@@ -1,0 +1,21 @@
+Roundtrip fidelity check failed for output/fantasy_3.fflow -> twee -> fflow
+Node count mismatch: Original 88 vs Roundtrip 89
+Node 3 type mismatch: DecisionNode vs ActionNode
+Node 15 type mismatch: DecisionNode vs ActionNode
+Node 29 type mismatch: DecisionNode vs ActionNode
+Node 50 type mismatch: DecisionNode vs ActionNode
+Node 58 field 'text' mismatch: 'You deal _damage damage.' vs 'You deal $_damage damage.'
+Node 74 field 'text' mismatch: 'Fall to the ground... -> #Game_Over' vs 'Fall to the ground...'
+Node 75 type mismatch: LogicNode vs JumpNode
+Node 76 type mismatch: JumpNode vs LogicNode
+Node 77 type mismatch: LogicNode vs JumpNode
+Node 78 type mismatch: SectionHeadingNode vs LogicNode
+Node 79 type mismatch: ActionNode vs SectionHeadingNode
+Node 80 field 'text' mismatch: 'You escape, but your pride stings.' vs 'You turn and flee from the goblin, heart pounding.'
+Node 81 type mismatch: JumpNode vs ActionNode
+Node 82 type mismatch: SectionHeadingNode vs JumpNode
+Node 83 type mismatch: ActionNode vs SectionHeadingNode
+Node 84 field 'text' mismatch: 'Your final stats:' vs '*You have fallen in battle.*'
+Node 85 field 'text' mismatch: 'HP: $player.hp / $player.maxHP' vs 'Your final stats:'
+Node 86 field 'text' mismatch: 'Gold: $player.gold' vs 'HP: $player.hp / $player.maxHP'
+Node 87 type mismatch: JumpNode vs ActionNode

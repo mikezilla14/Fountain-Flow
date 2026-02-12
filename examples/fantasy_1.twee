@@ -1,0 +1,127 @@
+:: StoryTitle
+Tiny RPG Sample (SugarCube)
+
+:: StoryData
+{
+  "ifid": "11111111-1111-1111-1111-111111111111",
+  "format": "SugarCube",
+  "format-version": "2.36.1",
+  "start": "Start"
+}
+
+:: Start
+<<set $player to {
+  name: "Hero",
+  maxHP: 20,
+  hp: 20,
+  atk: 5,
+  gold: 0
+}>>
+<<set $goblin to {
+  name: "Goblin",
+  maxHP: 10,
+  hp: 10,
+  atk: 3
+}>>
+
+You wake up in a forest, sword in hand. A goblin blocks the path.
+
+<<goto "Status">>
+
+:: Status
+'''Status'''
+
+Name: <<= $player.name>><br>
+HP: <<= $player.hp>> / <<= $player.maxHP>><br>
+ATK: <<= $player.atk>><br>
+Gold: <<= $player.gold>><br>
+
+<<if $player.hp <= 0>>
+	<<goto "Game Over">>
+<<else>>
+	[[Fight the goblin->Fight]]
+	[[Rest at the campfire->Rest]]
+<</if>>
+
+:: Rest
+You take a short rest by a flickering campfire.
+
+<<set $player.hp += 5>>
+<<if $player.hp > $player.maxHP>>
+	<<set $player.hp = $player.maxHP>>
+<</if>>
+
+You feel a bit better. Your HP is now <<= $player.hp>> / <<= $player.maxHP>>.
+
+[[Back to status->Status]]
+
+:: Fight
+<<if $goblin.hp <= 0>>
+	The goblin has already been defeated.
+
+	[[Back to status->Status]]
+<<else>>
+	'''Battle: <<= $goblin.name>>>'''
+
+	Your HP: <<= $player.hp>> / <<= $player.maxHP>><br>
+	Goblin HP: <<= $goblin.hp>> / <<= $goblin.maxHP>><br><br>
+
+	What do you do?
+
+	[[Attack->Player Attack]]
+	[[Try to run away->Run Away]]
+<</if>>
+
+:: Player Attack
+You swing your weapon at the goblin!
+
+<<set _damage to random(3, $player.atk)>>
+<<set $goblin.hp -= _damage>>
+
+You deal <<= _damage>> damage.
+
+<<if $goblin.hp <= 0>>
+	<<set $goblin.hp = 0>>
+
+	The goblin collapses!
+
+	<<set _goldGain to random(3,7)>>
+	<<set $player.gold += _goldGain>>
+
+	You loot <<= _goldGain>> gold. You now have <<= $player.gold>> gold.
+
+	[[Back to status->Status]]
+<<else>>
+	[[Continue...->Enemy Attack]]
+<</if>>
+
+:: Enemy Attack
+The goblin strikes back!
+
+<<set _damage to random(1, $goblin.atk)>>
+<<set $player.hp -= _damage>>
+
+It deals <<= _damage>> damage.
+
+<<if $player.hp <= 0>>
+	<<set $player.hp = 0>>
+	[[Fall to the ground...->Game Over]]
+<<else>>
+	[[Back to battle->Fight]]
+<</if>>
+
+:: Run Away
+You turn and flee from the goblin, heart pounding.
+
+You escape, but your pride stings.
+
+[[Back to status->Status]]
+
+:: Game Over
+''You have fallen in battle.''
+
+Your final stats:<br>
+HP: <<= $player.hp>> / <<= $player.maxHP>><br>
+Gold: <<= $player.gold>><br>
+
+[[Play again->Start]]

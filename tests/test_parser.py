@@ -3,8 +3,8 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from core_parser import parse
-from ast_nodes import (
+from fountain_flow.parser.fflow import parse
+from fountain_flow.core.ast_nodes import (
     SceneHeadingNode, DialogueNode, ActionNode, AssetNode, 
     StateChangeNode, LogicNode, DecisionNode, ChoiceNode, 
     JumpNode, FrontmatterNode
@@ -92,7 +92,7 @@ You are dead.
     assert relevant_nodes[6].target == "GAME_OVER"
 
 def test_choice():
-    script = "? What do?\n+ [Attack] Hit him -> #FIGHT"
+    script = "? What do?\n+ ->Hit him->#FIGHT"
     nodes = parse(script)
     assert isinstance(nodes[0], DecisionNode)
     assert nodes[0].text == "What do?"

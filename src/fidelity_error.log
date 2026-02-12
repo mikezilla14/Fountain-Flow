@@ -1,0 +1,5 @@
+Roundtrip fidelity check failed for ..\output\fantasy_3_norm.fflow -> twee -> fflow
+Node 3 type mismatch: DecisionNode vs ActionNode
+Node 15 type mismatch: DecisionNode vs ActionNode
+Node 29 type mismatch: DecisionNode vs ActionNode
+Node 50 type mismatch: DecisionNode vs ActionNode

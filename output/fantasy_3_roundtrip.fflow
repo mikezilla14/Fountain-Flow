@@ -1,0 +1,191 @@
+$$ player
+    $ name: Hero
+    $ maxHP: 20
+    $ hp: 20
+    $ atk: 5
+    $ gold: 0
+$$ goblin
+    $ name: Fetral
+    $ maxHP: 10
+    $ hp: 10
+    $ atk: 3
+===
+
+
+# Start
+
+You wake up in a forest, sword in hand. A goblin blocks the path.
+
+What do you do?
+
++ [Look at your reflection in the pool.]  -> #Player_Status
+
++ [Look at the goblin.]  -> #Goblin_Status
+
+
+# Player_Status
+
+**Status**
+
+Name: $player.name
+
+HP: $player.hp / $player.maxHP
+
+ATK: $player.atk
+
+Gold: $player.gold
+
+(IF: player.hp <= 0)
+
++ [Game_Over]  -> #Game_Over
+
+    (ELSE)
+
+Actions:
+
++ [Fight the goblin.]  -> #Fight
+
++ [Rest at the campfire.]  -> #Rest
+
+(END)
+
+
+# Goblin_Status
+
+**Status**
+
+Name: $goblin.name
+
+HP: $goblin.hp / $goblin.maxHP
+
+ATK: $goblin.atk
+
+Gold: $goblin.gold
+
+(IF: goblin.hp <= 0)
+
++ [Rest]  -> #Rest
+
+    (ELSE)
+
+Actions:
+
++ [Fight the goblin.]  -> #Fight
+
++ [Rest at the campfire.]  -> #Rest
+
++ [Look around.]  -> #Start
+
+(END)
+
+
+# Rest
+
+You take a short rest by a flickering campfire.
+
+~ player.hp += 5
+
+(IF: player.hp > player.maxHP)
+
+~ player.hp = player.maxHP
+
+(END)
+
+You feel a bit better. Your HP is now $player.hp / $player.maxHP.
+
++ [Player_Status]  -> #Player_Status
+
+
+# Fight
+
+(IF: goblin.hp <= 0)
+
+The goblin has already been defeated.
+
++ [Player_Status]  -> #Player_Status
+
+    (ELSE)
+
+**Battle: $goblin.name**
+
+Your HP: $player.hp / $player.maxHP
+
+Goblin HP: $goblin.hp / $goblin.maxHP
+
+What do you do?
+
++ [Swing your weapon!]  -> #Player_Attack
+
++ [Run away!]  -> #Run_Away
+
+(END)
+
+
+# Player_Attack
+
+You swing your weapon at the goblin!
+
+~ goblin.hp -= 5
+
+You deal 5 damage.
+
+(IF: goblin.hp <= 0)
+
+~ goblin.hp = 0
+
+The goblin collapses!
+
+~ player.gold += 5
+
+You loot 5 gold. You now have $player.gold gold.
+
++ [Player_Status]  -> #Player_Status
+
+    (ELSE)
+
++ [Enemy_Attack]  -> #Enemy_Attack
+
+(END)
+
+
+# Enemy_Attack
+
+The goblin strikes back!
+
+~ player.hp -= 3
+
+It deals 3 damage.
+
+(IF: player.hp <= 0)
+
+~ player.hp = 0
+
++ [Fall to the ground...]  -> #Game_Over
+
+    (ELSE)
+
++ [Fight]  -> #Fight
+
+(END)
+
+
+# Run_Away
+
+You turn and flee from the goblin, heart pounding.
+
+You escape, but your pride stings.
+
++ [Player_Status]  -> #Player_Status
+
+
+# Game_Over
+
+*You have fallen in battle.*
+
+Your final stats:
+
+HP: $player.hp / $player.maxHP
+
+Gold: $player.gold
+
++ [Start]  -> #Start

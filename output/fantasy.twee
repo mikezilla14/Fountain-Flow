@@ -1,0 +1,131 @@
+:: StoryInit
+<<set $SARAH_CONFIDENCE to 50>>
+<<set $INHIBITION to 70>>
+<<set $RISK_LEVEL to 0>>
+<<set $MARK_ENTHRALLMENT to 20>>
+<<set $WINDOWS_TINTED to true>>
+
+
+:: EXT. STREET OUTSIDE CLUB - NIGHT
+
+<<run $('body').addClass('city_street_night')>>
+
+<<audio "low_bass_thrum" play>>
+
+<<audio "car_unlock_chirp" play>>
+
+Mark’s car is a sleek, black SUV that looks like it belongs to a high-level executive. He opens the passenger door for you with a smirk that tells you he knows exactly what you’re thinking.
+
+[[INT. MARK'S CAR - NIGHT]]
+
+
+:: INT. MARK'S CAR - NIGHT
+
+<<run $('body').addClass('car_interior_dark')>>
+
+<<audio "door_heavy_thud" play>>
+
+(The interior smells of expensive leather and a faint hint of bourbon. The world outside becomes a muted blur behind the heavy tint of the windows.)
+
+**MARK**: Comfortable?
+
+
+How do you settle into the leather seat?
+
+[[Pull your skirt down and cross your legs.|THE_ESCALATION][$INHIBITION += 5; $SARAH_CONFIDENCE -= 5; /* You try to reclaim a bit of the girl you were four hours ago. */]]
+
+[[Lean back and let your knees fall open slightly.|THE_ESCALATION_SLOW][$INHIBITION -= 15; $RISK_LEVEL += 10; $MARK_ENTHRALLMENT += 10; /* You want him to see exactly what he’s bought with those drinks. */]]
+
+[["Are these windows really one-way?"|THE_ESCALATION_SLOW][$RISK_LEVEL += 5]]
+
+**MARK** ((Leaning closer)): Limo tint. I can see the world, Sarah. But the world only sees a reflection of itself.
+
+
+:: THE_ESCALATION_SLOW
+
+<img src="mark_curios_right.png">
+
+Mark doesn't start the engine. Instead, he shifts in his seat, his presence filling the cramped cabin. His hand finds your thigh, his thumb grazing the hem of your skirt.
+
+**MARK**: You were so bold on the dance floor. But here, in the dark... you’re trembling.
+
+
+:: THE_ESCALATION
+
+<img src="mark_intense_right.png">
+
+Mark doesn't start the engine. Instead, he shifts in his seat, his presence filling the cramped cabin. His hand finds your thigh, his thumb grazing the hem of your skirt.
+
+
+How do you handle his touch?
+
+[["I'm not sure this is a good idea, Mark."|THE_DARING_ACT][$SARAH_CONFIDENCE += 10; $INHIBITION -= 10; /* You bridge the gap, placing your hand over his and pressing it firmer against your skin. */]]
+
+[["It's just the air conditioning."|THE_DARING_ACT][$MARK_ENTHRALLMENT -= 5]]
+
+**MARK**: Is that so? Let’s see if we can’t warm you up then. -> #THE_DARING_ACT
+
+**MARK**: You were so bold on the dance floor. But here, in the dark... you’re trembling.
+
+
+How do you handle his touch?
+
+[["I'm not trembling from fear, Mark."|THE_DARING_ACT][$SARAH_CONFIDENCE += 10; $INHIBITION -= 10; /* You bridge the gap, placing your hand over his and pressing it firmer against your skin. */]]
+
+[["It's just the air conditioning."|THE_DARING_ACT][$MARK_ENTHRALLMENT -= 5]]
+
+**MARK**: Is that so? Let’s see if we can’t warm you up then.
+
+
+:: THE_DARING_ACT
+
+Mark’s hand moves higher. The risk of being in a parked car on a semi-busy street starts to feed into your arousal.
+
+<<audio "fabric_rustle" play>>
+
+<<if $OUTFIT_RISK > 15>>
+**MARK**: This outfit... it was an invitation, wasn't it? You wanted someone to notice. You wanted to be caught. (ELSE) MARK You look so innocent, Sarah. But I saw the way you watched the crowd watching you. (END)
+
+
+The streetlights flicker through the windshield as a group of clubgoers walks past the car.
+
+[[Stiffen up and look out the window.|THE_CLIMAX_OF_MOMENT][$INHIBITION += 10; /* You hold your breath as they pass just inches away. They have no idea you're right there. */]]
+
+[[Arch your back and let out a soft moan, regardless of who is outside.|THE_CLIMAX_OF_MOMENT][$INHIBITION -= 25; $RISK_LEVEL += 20; $MARK_ENTHRALLMENT += 20; /* The thrill of the "almost-seen" sends a jolt through you that makes your head spin. */]]
+
+
+:: THE_CLIMAX_OF_MOMENT
+
+<<audio "tension_pulse_heavy" play>>
+
+Mark’s voice is a low growl now. He’s no longer just testing you; he’s taking what you’re offering.
+
+**MARK**: Do you want me to take you home, Sarah? Or do you want to stay right here and see if anyone notices the car rocking?
+
+
+Make your choice for the end of the chapter.
+
+[["Stay here. I want to feel them walk by while you... "|CHAPTER_TWO_END][$STATUS = "The Backseat Exhibitionist"; $SARAH_CONFIDENCE += 20]]
+
+<<audio "seat_recline_click" play>>
+
+Mark climbs into the back with you, and the last of your old self vanishes in the shadows of the SUV.
+
+[["Take me home. I want you all to myself, without the windows."|CHAPTER_TWO_END][$STATUS = "The Private Submissive"; $MARK_ENTHRALLMENT += 15]]
+
+<<audio "engine_start_roar" play>>
+
+The car roars to life, and you settle in for the ride, knowing your life will never be the same.
+
+[[CHAPTER_TWO_END]]
+
+
+:: CHAPTER_TWO_END
+
+<<run $('body').addClass('black')>>
+
+<<audio "fade_out" play>>
+
+The city lights blur into long streaks of neon as the night takes its next turn.
+
+<<set $CHAPTER_02_COMPLETE = true>>

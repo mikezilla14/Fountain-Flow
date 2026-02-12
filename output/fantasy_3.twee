@@ -1,0 +1,92 @@
+:: StoryInit
+<<set $player to { name: "Hero", maxHP: 20, hp: 20, atk: 5, gold: 0 }>>
+<<set $goblin to { name: "Fetral", maxHP: 10, hp: 10, atk: 3, gold: 7 }>>
+
+:: Start
+You wake up in a forest, sword in hand. A goblin blocks the path.
+What do you do?
+[[Look at your reflection in the pool.|Player_Status]]
+[[Look at the goblin.|Goblin_Status]]
+:: Player_Status
+Status
+Name: $player.name
+HP: $player.hp / $player.maxHP
+ATK: $player.atk
+Gold: $player.gold
+<<if $player.hp <= 0>>
+[[Continue|Game_Over]]
+<<else>>
+Actions:
+[[Fight the goblin.|Fight]]
+[[Rest at the campfire.|Rest]]
+[[Look around.|Start]]
+<<endif>>
+:: Goblin_Status
+Status
+Name: $goblin.name
+HP: $goblin.hp / $goblin.maxHP
+ATK: $goblin.atk
+Gold: $goblin.gold
+<<if $goblin.hp <= 0>>
+[[Continue|Rest]]
+<<else>>
+Actions:
+[[Fight the goblin.|Fight]]
+[[Rest at the campfire.|Rest]]
+[[Look around.|Start]]
+<<endif>>
+:: Rest
+You take a short rest by a flickering campfire.
+<<set $player.hp += 5>>
+<<if $player.hp > $player.maxHP>>
+<<set $player.hp = $player.maxHP>>
+<<endif>>
+You feel a bit better. Your HP is now $player.hp / $player.maxHP.
+[[Continue|Player_Status]]
+:: Fight
+<<if $goblin.hp <= 0>>
+The goblin has already been defeated.
+[[Continue|Player_Status]]
+<<else>>
+**Battle: $goblin.name**
+Your HP: $player.hp / $player.maxHP
+Goblin HP: $goblin.hp / $goblin.maxHP
+What do you do?
+[[Swing your weapon!|Player_Attack]]
+[[Run away!|Run_Away]]
+<<endif>>
+:: Player_Attack
+You swing your weapon at the goblin!
+<<set $_damage = random(3,$player.atk)>>
+<<set $goblin.hp -= $_damage>>
+You deal $_damage damage.
+<<if $goblin.hp <= 0>>
+<<set $goblin.hp = 0>>
+The goblin collapses!
+<<set $player.gold += $goblin.gold>>
+You loot $goblin.gold gold. You now have $player.gold gold.
+[[Continue|Player_Status]]
+<<else>>
+[[Continue|Enemy_Attack]]
+<<endif>>
+:: Enemy_Attack
+The goblin strikes back!
+<<set $player.hp -= 3>>
+It deals 3 damage.
+<<if $player.hp <= 0>>
+<<set $player.hp = 0>>
+Fall to the ground...
+<<goto "Game_Over">>
+<<else>>
+[[Continue|Fight]]
+<<endif>>
+:: Run_Away
+You turn and flee from the goblin, heart pounding.
+You escape, but your pride stings.
+[[Continue|Player_Status]]
+:: Game_Over
+*You have fallen in battle.*
+Your final stats:
+HP: $player.hp / $player.maxHP
+Gold: $player.gold
+[[Continue|Start]]

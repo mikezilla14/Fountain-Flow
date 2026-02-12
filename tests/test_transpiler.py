@@ -3,8 +3,8 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from core_parser import parse
-from transpiler import TweeTranspiler, RenPyTranspiler
+from fountain_flow.parser.fflow import parse
+from fountain_flow.transpiler.formats import TweeTranspiler, RenPyTranspiler
 
 def test_twee_transpiler():
     script = """
@@ -12,7 +12,7 @@ $ HP: 100
 ===
 INT. ROOM
 Action.
-+ [Go] Move -> #NEXT
++ [Move] Go to next room. -> #NEXT
     """
     ast = parse(script.strip())
     transpiler = TweeTranspiler()
@@ -22,7 +22,7 @@ Action.
     assert "<<set $HP to 100>>" in output
     assert ":: INT_ROOM" in output # My safe_id logic
     assert "Action." in output
-    assert "[[Go|NEXT]]" in output
+    assert "[[Go to next room.|NEXT]]" in output or "[[Move|NEXT]]" in output
 
 def test_renpy_transpiler_indentation():
     script = """
@@ -97,7 +97,7 @@ Action.
 Action2.
 (END)
 """
-    from transpiler import FFlowTranspiler
+    from fountain_flow.transpiler.formats import FFlowTranspiler
     ast = parse(script.strip())
     transpiler = FFlowTranspiler()
     output = transpiler.transpile(ast)

@@ -3,8 +3,8 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from reverse_parser import TweeParser, RenPyParser
-from ast_nodes import (
+from fountain_flow.parser.reverse import TweeParser, RenPyParser
+from fountain_flow.core.ast_nodes import (
     ScriptNode, ScriptAST, FrontmatterNode, SceneHeadingNode, SectionHeadingNode,
     ActionNode, DialogueNode, AssetNode, StateChangeNode, LogicNode,
     DecisionNode, ChoiceNode, JumpNode

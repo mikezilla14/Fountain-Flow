@@ -1,0 +1,146 @@
+$ SARAH_CONFIDENCE: 50
+$ INHIBITION: 70
+$ RISK_LEVEL: 0
+$ MARK_ENTHRALLMENT: 20
+$ WINDOWS_TINTED: true
+
+
+===
+
+# EXT. STREET OUTSIDE CLUB - NIGHT
+
+! BG: city_street_night
+! MUSIC: low_bass_thrum
+! SFX: car_unlock_chirp
+
+Mark’s car is a sleek, black SUV that looks like it belongs to a high-level executive. He opens the passenger door for you with a smirk that tells you he knows exactly what you’re thinking.
+-> #INT. MARK'S CAR - NIGHT
+
+# INT. MARK'S CAR - NIGHT
+
+! BG: car_interior_dark
+! SFX: door_heavy_thud
+
+(The interior smells of expensive leather and a faint hint of bourbon. The world outside becomes a muted blur behind the heavy tint of the windows.)
+
+MARK
+Comfortable?
+
+? How do you settle into the leather seat?
+
++ ->Modest->#THE_ESCALATION
+    ~ $INHIBITION += 5
+    ~ $SARAH_CONFIDENCE -= 5
+    You try to reclaim a bit of the girl you were four hours ago.
+
++ [Provocative] Lean back and let your knees fall open slightly.
+    ~ $INHIBITION -= 15
+    ~ $RISK_LEVEL += 10
+    ~ $MARK_ENTHRALLMENT += 10
+    You want him to see exactly what he’s bought with those drinks.
+	-> #THE_ESCALATION_SLOW
+
++ ->Inquisitive->#THE_ESCALATION
+    ~ $RISK_LEVEL += 5
+    MARK
+    (Leaning closer)
+    Limo tint. I can see the world, Sarah. But the world only sees a reflection of itself.
+# THE_ESCALATION_SLOW
+
+! SHOW: mark, curios, right
+
+Mark doesn't start the engine. Instead, he shifts in his seat, his presence filling the cramped cabin. His hand finds your thigh, his thumb grazing the hem of your skirt.
+
+MARK
+You were so bold on the dance floor. But here, in the dark... you’re trembling. 
+
+# THE_ESCALATION
+
+! SHOW: mark, intense, right
+
+Mark doesn't start the engine. Instead, he shifts in his seat, his presence filling the cramped cabin. His hand finds your thigh, his thumb grazing the hem of your skirt.
+
+? How do you handle his touch?
+
++ ->Leaning_In->#THE_DARING_ACT
+    ~ $SARAH_CONFIDENCE += 10
+    ~ $INHIBITION -= 10
+    You bridge the gap, placing your hand over his and pressing it firmer against your skin.
+
++ [Playful Deflection] "It's just the air conditioning."
+    ~ $MARK_ENTHRALLMENT -= 5
+    MARK
+    Is that so? Let’s see if we can’t warm you up then.
+	-> #THE_DARING_ACT
+
+MARK
+You were so bold on the dance floor. But here, in the dark... you’re trembling. 
+
+? How do you handle his touch?
+
++ ->Not_Trembling->#THE_DARING_ACT
+    ~ $SARAH_CONFIDENCE += 10
+    ~ $INHIBITION -= 10
+    You bridge the gap, placing your hand over his and pressing it firmer against your skin.
+
++ [Playful Deflection] "It's just the air conditioning."
+    ~ $MARK_ENTHRALLMENT -= 5
+    MARK
+    Is that so? Let’s see if we can’t warm you up then.
+
+# THE_DARING_ACT
+
+Mark’s hand moves higher. The risk of being in a parked car on a semi-busy street starts to feed into your arousal.
+
+! SFX: fabric_rustle
+
+(IF: $OUTFIT_RISK > 15)
+    MARK
+    This outfit... it was an invitation, wasn't it? You wanted someone to notice. You wanted to be caught.
+(ELSE)
+    MARK
+    You look so innocent, Sarah. But I saw the way you watched the crowd watching you.
+(END)
+
+? The streetlights flicker through the windshield as a group of clubgoers walks past the car.
+
++ ->Freeze->#THE_CLIMAX_OF_MOMENT
+    ~ $INHIBITION += 10
+    You hold your breath as they pass just inches away. They have no idea you're right there.
+
++ ->Show_Off->#THE_CLIMAX_OF_MOMENT
+    ~ $INHIBITION -= 25
+    ~ $RISK_LEVEL += 20
+    ~ $MARK_ENTHRALLMENT += 20
+    The thrill of the "almost-seen" sends a jolt through you that makes your head spin.
+
+# THE_CLIMAX_OF_MOMENT
+
+! MUSIC: tension_pulse_heavy
+
+Mark’s voice is a low growl now. He’s no longer just testing you; he’s taking what you’re offering.
+
+MARK
+Do you want me to take you home, Sarah? Or do you want to stay right here and see if anyone notices the car rocking?
+
+? Make your choice for the end of the chapter.
+
++ ->The_Risk->#CHAPTER_TWO_END
+    ~ $STATUS = "$The $Backseat $Exhibitionist"
+    ~ $SARAH_CONFIDENCE += 20
+    ! SFX: seat_recline_click
+    Mark climbs into the back with you, and the last of your old self vanishes in the shadows of the SUV.
+
++ ->The_Destination->#CHAPTER_TWO_END
+    ~ $STATUS = "$The $Private $Submissive"
+    ~ $MARK_ENTHRALLMENT += 15
+    ! SFX: engine_start_roar
+    The car roars to life, and you settle in for the ride, knowing your life will never be the same.
+
+# CHAPTER_TWO_END
+! BG: black
+! MUSIC: fade_out
+
+The city lights blur into long streaks of neon as the night takes its next turn.
+
+~ $CHAPTER_02_COMPLETE = true
